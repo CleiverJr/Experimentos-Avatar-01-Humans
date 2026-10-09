@@ -6,7 +6,9 @@ Este modulo implementa a simulacao de uma mente ativa em avatares virtuais atrav
 
 ## 1. Video Demonstrativo Gerado
 
-<video src="video_omnihuman.mp4" controls width="100%"></video>
+![OmniHuman-1.5 Dual System](demo_omnihuman.gif)
+
+- **Video com Audio HD:** [video_omnihuman.mp4](video_omnihuman.mp4)
 
 - **Arquivo:** `video_omnihuman.mp4`
 - **Duracao:** 10.76 segundos (269 frames)

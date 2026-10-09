@@ -8,7 +8,9 @@ Este modulo implementa o paradigma de difusao generativa estocastica para sintes
 
 ## 1. Video Demonstrativo Gerado
 
-<video src="video_mdm.mp4" controls width="100%"></video>
+![Motion Diffusion Model](demo_mdm.gif)
+
+- **Video com Audio HD:** [video_mdm.mp4](video_mdm.mp4)
 
 - **Arquivo:** `video_mdm.mp4`
 - **Duracao:** 12.48 segundos (312 frames)

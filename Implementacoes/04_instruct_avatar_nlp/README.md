@@ -6,7 +6,9 @@ Este modulo implementa o controle dramatico e comportamental guiado por texto em
 
 ## 1. Video Demonstrativo Gerado
 
-<video src="video_instruct.mp4" controls width="100%"></video>
+![InstructAvatar NLP](demo_instruct.gif)
+
+- **Video com Audio HD:** [video_instruct.mp4](video_instruct.mp4)
 
 - **Arquivo:** `video_instruct.mp4`
 - **Duracao:** 10.80 segundos (270 frames)

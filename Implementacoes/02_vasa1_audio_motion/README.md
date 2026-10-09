@@ -6,7 +6,9 @@ Este modulo implementa a sintese holistica de movimento facial e atitude esponta
 
 ## 1. Video Demonstrativo Gerado
 
-<video src="video_vasa1.mp4" controls width="100%"></video>
+![VASA-1 Dinamica Holistica](demo_vasa1.gif)
+
+- **Video com Audio HD:** [video_vasa1.mp4](video_vasa1.mp4)
 
 - **Arquivo:** `video_vasa1.mp4`
 - **Duracao:** 9.84 segundos (246 frames)

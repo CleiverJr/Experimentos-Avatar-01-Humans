@@ -6,7 +6,9 @@ Este modulo implementa o comportamento social e conversacional em cenarios diadi
 
 ## 1. Video Demonstrativo Gerado
 
-<video src="video_diadico.mp4" controls width="100%"></video>
+![Audio2Photoreal Dialogo Diadico](demo_diadico.gif)
+
+- **Video com Audio HD:** [video_diadico.mp4](video_diadico.mp4)
 
 - **Arquivo:** `video_diadico.mp4`
 - **Duracao:** 14.68 segundos (367 frames)

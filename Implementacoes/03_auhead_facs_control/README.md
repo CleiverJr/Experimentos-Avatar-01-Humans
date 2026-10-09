@@ -7,15 +7,17 @@ Este modulo implementa o controle anatomico e biomecanico baseado no Facial Acti
 ## 1. Videos Demonstrativos Gerados
 
 ### A. Video Comparativo Split-Screen (VASA-1 Neutro vs AUHead Expressivo)
-<video src="video_comparativo_vasa_vs_auhead.mp4" controls width="100%"></video>
+![Comparativo VASA-1 vs AUHead](demo_comparativo.gif)
 
-- **Arquivo:** `video_comparativo_vasa_vs_auhead.mp4`
+- **Video com Audio HD:** [video_comparativo_vasa_vs_auhead.mp4](video_comparativo_vasa_vs_auhead.mp4)
 - **Formato:** 2048x1024 (1024x1024 lado a lado com telemetria em tempo real)
 - **Duracao:** 7.64 segundos (191 frames @ 25 FPS)
 - **Cenario:** Comparacao direta da mesma fala entre a expressao neutra e a ativacao controlada de Raiva (AU04) e Alegria (AU12).
 
 ### B. Video Solo AUHead
-<video src="video_auhead.mp4" controls width="100%"></video>
+![AUHead FACS Solo](demo_auhead.gif)
+
+- **Video com Audio HD:** [video_auhead.mp4](video_auhead.mp4)
 
 - **Arquivo:** `video_auhead.mp4`
 - **Formato:** 1024x1024 @ 25 FPS
