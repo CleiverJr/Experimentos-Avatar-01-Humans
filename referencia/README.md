@@ -1,4 +1,4 @@
-# 🛠️ Código de Referência
+# Código de Referência
 
 Esta pasta contém o código e utilitários de referência técnica para a execução do motor neural (LivePortrait / Ditto):
 

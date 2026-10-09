@@ -1,4 +1,4 @@
-# 🧬 Experimentos Avatar 01 — Humans
+# Experimentos Avatar 01 — Humans
 
 Repositório de pesquisa científica, validação matemática e implementações práticas dedicadas à **síntese, animação neural foto-realista e controle comportamental de avatares humanos** a partir de áudio de fala e linguagem natural.
 
@@ -6,7 +6,7 @@ O objetivo deste projeto é investigar, destrinchar matematicamente e implementa
 
 ---
 
-## 📊 Sumário Executivo dos Experimentos e Resultados
+## Sumário Executivo dos Experimentos e Resultados
 
 Todos os 7 módulos foram implementados do zero, validados algebricamente e renderizados em **vídeos foto-realistas de alta fidelidade (1024x1024 @ 25 FPS)** com aceleração por hardware na GPU Apple Silicon (Metal Performance Shaders - MPS com precisão BF16).
 
@@ -22,7 +22,7 @@ Todos os 7 módulos foram implementados do zero, validados algebricamente e rend
 
 ---
 
-## 🔬 Detalhamento Técnico dos Módulos Testados
+## Detalhamento Técnico dos Módulos Testados
 
 ```
                                 ARQUITETURA CONCEITUAL DO PROJETO
@@ -173,7 +173,7 @@ Todos os 7 módulos foram implementados do zero, validados algebricamente e rend
 
 ---
 
-## 📂 Estrutura de Arquivos do Repositório
+## Estrutura de Arquivos do Repositório
 
 ```text
 Experimentos-Avatar-01-Humans/
@@ -237,7 +237,7 @@ Experimentos-Avatar-01-Humans/
 
 ---
 
-## 🚀 Como Executar e Reproduzir os Experimentos
+## Como Executar e Reproduzir os Experimentos
 
 ### 1. Pré-requisitos do Ambiente
 - macOS com Apple Silicon (M1/M2/M3/M4) ou Linux com GPU CUDA;
@@ -284,7 +284,7 @@ python Implementacoes/07_motion_diffusion_mdm/renderizar_video_mdm.py
 
 ---
 
-## ⚙️ Diretrizes de Engenharia e Eficiência
+## Diretrizes de Engenharia e Eficiência
 1. **Aceleração por Hardware Apple Silicon (MPS):** Todo o pipeline de decodificação neural $WarpF3D \to SPADE$ utiliza a GPU Apple Silicon com tensores em ponto flutuante `bfloat16`, atingindo taxas de renderização de ~4 a 6 frames por segundo em resolução nativa 1024x1024;
 2. **Prevenção de Incompatibilidade de Dtype:** Todas as manipulações de matrizes de rotação e offsets de Action Units utilizam cast explícito `np.float32`, evitando a promoção indesejada para `float64` que causaria falhas no MLP de stitching do PyTorch;
 3. **Limpeza Inteligente de Armazenamento:** Os scripts removem automaticamente os milhares de frames `.jpg` intermediários após a compressão final em `.mp4` via FFmpeg, preservando o disco e o repositório Git leves.

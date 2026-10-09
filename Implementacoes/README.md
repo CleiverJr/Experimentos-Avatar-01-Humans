@@ -1,10 +1,10 @@
-# 🛠️ Implementações Manuais — Catálogo de Módulos e Resultados
+# Implementações Manuais — Catálogo de Módulos e Resultados
 
 Esta pasta reúne a implementação manual dos 7 módulos investigados no projeto, desde os fundamentos geométricos e anatômicos até difusão de movimento e simulação cognitiva dual.
 
 ---
 
-## 🗺️ Mapa de Módulos Implementados
+## Mapa de Módulos Implementados
 
 | Módulo | Paradigma / Modelo | Script de Movimento | Script de Renderização | Trajetória (`.npz`) | Vídeo Demonstrativo (`.mp4`) | Destaque Técnico |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -18,7 +18,7 @@ Esta pasta reúne a implementação manual dos 7 módulos investigados no projet
 
 ---
 
-## 🔬 Síntese dos Experimentos Executados
+## Síntese dos Experimentos Executados
 
 ### Módulo 01 — Ditto Core & Espaço Latente
 - **Foco:** Fundamentos de cinemática e geometria projetiva.
