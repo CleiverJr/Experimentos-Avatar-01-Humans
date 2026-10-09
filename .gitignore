@@ -1,0 +1,41 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Python & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Neural network weights & checkpoints (>100MB / binary models)
+**/checkpoints/ditto_pytorch/
+**/checkpoints/piper/*.onnx
+*.pth
+*.pt
+*.onnx
+*.bin
+*.task
+*.safetensors
+*.ckpt
+
+# Temporary render frames & execution runs
+**/runs/
+**/temp/
+**/tmp/
+*.swp
+*~
+
+# IDE
+.vscode/
+.idea/
