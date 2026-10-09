@@ -1,8 +1,0 @@
-# Dependências da Trilha D: Controle, Emoção e Comportamento
-# Testado com Python 3.10 no macOS (Apple Silicon MPS / CPU)
-
-torch>=2.0.0
-numpy>=1.23.0
-scipy>=1.10.0
-soundfile>=0.12.0
-matplotlib>=3.7.0
