@@ -23,7 +23,7 @@ import argparse
 
 import numpy as np
 
-DITTO_DIR = os.environ.get("DITTO_DIR", "/home/claude/w/ditto-talkinghead")
+DITTO_DIR = os.environ.get("DITTO_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "ditto_repo"))
 sys.path.insert(0, DITTO_DIR)
 
 EMO_NAMES = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise', 'Contempt']

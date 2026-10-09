@@ -19,8 +19,12 @@ dist/
 *.egg-info/
 
 # Neural network weights & checkpoints (>100MB / binary models)
+**/ditto_repo
+**/ditto_repo/
+**/checkpoints/ditto_pytorch
 **/checkpoints/ditto_pytorch/
-**/checkpoints/piper/*.onnx
+**/checkpoints/piper
+**/checkpoints/piper/
 *.pth
 *.pt
 *.onnx
