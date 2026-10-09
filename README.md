@@ -6,6 +6,17 @@ O projeto investiga os princípios de modelos do estado da arte (SOTA): desde a 
 
 ---
 
+## Nota Tecnica sobre a Abordagem: Engenharia Reversa e Emulacao Pratica
+
+E fundamental pontuar a realidade tecnica deste segmento: a grande maioria dos modelos de ponta estudados (**VASA-1** da Microsoft Research, **OmniHuman-1.5** da ByteDance, **Audio2Photoreal** da Meta Reality Labs, **InstructAvatar** e **AUHead**) **nao possuem codigo-fonte nem pesos liberados publicamente** pelas empresas.
+
+Por esse motivo, o trabalho aqui realizado consiste em uma **engenharia pragmatica controlada**:
+1. Utilizamos a espinha dorsal de codigo aberto do **LivePortrait / Ditto (ACM MM 2025)** como motor neural e espaco latente compartilhado (21 keypoints 3D implicitos e rotacao em $\mathrm{SO}(3)$);
+2. Implementamos e acoplamos diretamente sobre essa base os mecanismos matematicos e diretivas comportamentais descritos em cada paper (o LMDM, as Action Units FACS, a oclusao labial por VAD, os acenos diadicos, o Gaze Aversion cognitivo e a difusao estocastica reversa);
+3. Dessa forma, conseguimos simular, testar e comparar empiricamente as contribuicoes de cada modelo sob condicoes rigorosamente identicas, mesmo sem acesso aos modelos proprietarios fechados.
+
+---
+
 ## Modulos Individuais e Demonstracoes
 
 Cada modulo possui documentacao teorica e matematica aprofundada dentro de sua respectiva pasta em `Implementacoes/`.

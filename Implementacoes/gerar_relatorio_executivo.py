@@ -1,7 +1,7 @@
 """
-Script Gerador do Relatorio Tecnico Executivo em PDF
-====================================================
-Gera o relatorio tecnico sobrio, sem firulas esteticas, para apresentacao na reuniao:
+Script Gerador do Relatorio Tecnico Clean (Pesquisa Trilha D)
+============================================================
+Gera o documento limpo, direto e sem firulas burocraticas para uso em reuniao:
 - Arquivo de Saida: Implementacoes/relatorio_experimentos_avatar.pdf
 """
 
@@ -37,22 +37,22 @@ class NumberedCanvas(canvas.Canvas):
     def draw_page_decorations(self, page_count):
         self.saveState()
         self.setFont("Helvetica", 8)
-        self.setFillColor(colors.HexColor("#475569"))
+        self.setFillColor(colors.HexColor("#64748B"))
 
-        # Cabecalho superior a partir da pagina 2
+        # Cabecalho superior sutil a partir da pagina 2
         if self._pageNumber > 1:
-            self.drawString(18 * mm, 287 * mm, "RELATORIO TECNICO EXECUTIVO | EXPERIMENTOS AVATAR 01 (HUMANS)")
-            self.drawRightString(192 * mm, 287 * mm, "OUTUBRO 2026")
-            self.setStrokeColor(colors.HexColor("#CBD5E1"))
+            self.drawString(18 * mm, 287 * mm, "Pesquisa Trilha D: Sintese e Controle de Avatares Neurais")
+            self.drawRightString(192 * mm, 287 * mm, "Relatorio para Reuniao Tecnica")
+            self.setStrokeColor(colors.HexColor("#E2E8F0"))
             self.setLineWidth(0.5)
             self.line(18 * mm, 284 * mm, 192 * mm, 284 * mm)
 
-        # Rodape inferior em todas as paginas
-        self.drawString(18 * mm, 12 * mm, "Sintese e Controle Comportamental de Avatares Neurais — Engenharia e Pesquisa")
+        # Rodape discreto
+        self.drawString(18 * mm, 12 * mm, "Pesquisa Trilha D | Engenharia e Experimentacao Pratica")
         self.drawRightString(192 * mm, 12 * mm, f"Pagina {self._pageNumber} de {page_count}")
-        self.setStrokeColor(colors.HexColor("#CBD5E1"))
+        self.setStrokeColor(colors.HexColor("#E2E8F0"))
         self.setLineWidth(0.5)
-        self.line(18 * mm, 16 * mm, 192 * mm, 16 * mm)
+        self.line(18 * mm, 15 * mm, 192 * mm, 15 * mm)
 
         self.restoreState()
 
@@ -64,40 +64,40 @@ def gerar_relatorio_pdf(caminho_pdf: str):
         leftMargin=18 * mm,
         rightMargin=18 * mm,
         topMargin=18 * mm,
-        bottomMargin=20 * mm
+        bottomMargin=18 * mm
     )
 
     styles = getSampleStyleSheet()
 
-    # Estilos sobrios e corporativos
-    style_doc_title = ParagraphStyle(
-        'DocTitle',
+    # Estilos limpos e tipografia moderna
+    style_title = ParagraphStyle(
+        'MainTitle',
         parent=styles['Heading1'],
         fontName='Helvetica-Bold',
-        fontSize=16,
-        leading=19,
+        fontSize=18,
+        leading=22,
         textColor=colors.HexColor("#0F172A"),
-        spaceAfter=3
+        spaceAfter=4
     )
 
-    style_doc_sub = ParagraphStyle(
-        'DocSub',
+    style_sub = ParagraphStyle(
+        'MainSub',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=9.5,
-        leading=13,
-        textColor=colors.HexColor("#334155"),
-        spaceAfter=8
+        fontSize=10,
+        leading=14,
+        textColor=colors.HexColor("#475569"),
+        spaceAfter=12
     )
 
     style_h1 = ParagraphStyle(
         'SecH1',
         parent=styles['Heading1'],
         fontName='Helvetica-Bold',
-        fontSize=11.5,
-        leading=14,
+        fontSize=12,
+        leading=15,
         textColor=colors.HexColor("#0F172A"),
-        spaceBefore=8,
+        spaceBefore=10,
         spaceAfter=4,
         keepWithNext=True
     )
@@ -107,21 +107,30 @@ def gerar_relatorio_pdf(caminho_pdf: str):
         parent=styles['Heading2'],
         fontName='Helvetica-Bold',
         fontSize=9.5,
-        leading=12,
+        leading=13,
         textColor=colors.HexColor("#1E293B"),
-        spaceBefore=6,
+        spaceBefore=7,
         spaceAfter=2,
         keepWithNext=True
     )
 
     style_body = ParagraphStyle(
-        'BodyTextCustom',
+        'BodyCustom',
         parent=styles['BodyText'],
         fontName='Helvetica',
         fontSize=8.5,
-        leading=11.5,
+        leading=12,
         textColor=colors.HexColor("#1E293B"),
-        spaceAfter=4
+        spaceAfter=5
+    )
+
+    style_note = ParagraphStyle(
+        'NoteBox',
+        parent=style_body,
+        fontName='Helvetica',
+        fontSize=8,
+        leading=11.5,
+        textColor=colors.HexColor("#334155")
     )
 
     style_tbl_header = ParagraphStyle(
@@ -137,7 +146,7 @@ def gerar_relatorio_pdf(caminho_pdf: str):
         'TblCell',
         fontName='Helvetica',
         fontSize=7,
-        leading=9,
+        leading=9.5,
         textColor=colors.HexColor("#1E293B")
     )
 
@@ -145,232 +154,151 @@ def gerar_relatorio_pdf(caminho_pdf: str):
         'TblCellBold',
         fontName='Helvetica-Bold',
         fontSize=7,
-        leading=9,
+        leading=9.5,
         textColor=colors.HexColor("#0F172A")
     )
 
     story = []
 
     # -------------------------------------------------------------------------
-    # CABECALHO E DADOS EXECUTIVOS
+    # TITULO DIRETO (SEM CABECALHO BUROCRATICO)
     # -------------------------------------------------------------------------
-    story.append(Paragraph("RELATORIO TECNICO EXECUTIVO", style_doc_title))
-    story.append(Paragraph("Sintese Neural, Controle Comportamental e Comparativo SOTA de Avatares Foto-Realistas", style_doc_sub))
-    story.append(HRFlowable(width="100%", thickness=1.2, color=colors.HexColor("#0F172A"), spaceAfter=6))
+    story.append(Paragraph("Pesquisa Trilha D: Sintese e Controle de Avatares Neurais", style_title))
+    story.append(Paragraph("Relatorio Pratico de Engenharia, Mecanismos Comportamentais e Decisoes de Produto", style_sub))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=colors.HexColor("#0F172A"), spaceAfter=10))
 
-    meta_data = [
-        [
-            Paragraph("<b>Projeto:</b> Experimentos-Avatar-01-Humans", style_tbl_cell),
-            Paragraph("<b>Data:</b> Outubro de 2026", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>Autor:</b> Cleiver Junior", style_tbl_cell),
-            Paragraph("<b>Finalidade:</b> Alinhamento de Engenharia e Tomada de Decisao", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>Status:</b> 8 Modulos Concluidos, Validados e Sincronizados", style_tbl_cell),
-            Paragraph("<b>Hardware de Teste:</b> Apple Silicon M-Series (GPU MPS / PyTorch)", style_tbl_cell),
-        ]
+    # -------------------------------------------------------------------------
+    # 1. NOTA TECNICA SINCERA: ENGENHARIA REVERSA E EMULACAO PRATICA
+    # -------------------------------------------------------------------------
+    story.append(Paragraph("1. O Contexto Real: Engenharia Reversa e Emulacao dos Modelos", style_h1))
+    
+    nota_texto = (
+        "<b>Importante esclarecer de imediato:</b> A grande maioria dos modelos de ponta apresentados pela industria "
+        "(como o <b>VASA-1</b> da Microsoft, <b>OmniHuman-1.5</b> da ByteDance, <b>Audio2Photoreal</b> da Meta Reality Labs, "
+        "<b>InstructAvatar</b> e <b>AUHead</b>) <b>nao possui codigo-fonte nem pesos de rede liberados publicamente</b>. "
+        "Sao pesquisas fechadas e proprietarias.<br/><br/>"
+        "Por isso, o que construimos aqui e, de forma transparente, uma <b>engenharia pragmatica de alto nivel</b>: "
+        "adotamos o motor neural de codigo aberto do <b>LivePortrait / Ditto (ACM MM 2025)</b> como espaco latente e base "
+        "anatomica compartilhada (21 keypoints 3D implícitos + rotacao SO(3)), e <b>implementamos diretamente sobre esse motor "
+        "os principios matematicos e comportamentais de cada artigo</b>. Isso nos permitiu testar e comparar as ideias "
+        "lado a lado sob as mesmas condicoes exatas."
+    )
+    
+    box_data = [[Paragraph(nota_texto, style_note)]]
+    box_table = Table(box_data, colWidths=[174 * mm])
+    box_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor("#F1F5F9")),
+        ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor("#94A3B8")),
+        ('TOPPADDING', (0, 0), (-1, -1), 6),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+        ('LEFTPADDING', (0, 0), (-1, -1), 8),
+        ('RIGHTPADDING', (0, 0), (-1, -1), 8),
+    ]))
+    story.append(box_table)
+    story.append(Spacer(1, 8))
+
+    # -------------------------------------------------------------------------
+    # 2. OS 4 PROBLEMAS PRATICOS RESOLVIDOS
+    # -------------------------------------------------------------------------
+    story.append(Paragraph("2. Os 4 Principais Gargalos de Avatares e Como Foram Resolvidos", style_h1))
+    p_prob = (
+        "Ao implementar e rodar os testes, focamos em resolver os quatro defeitos que mais quebram a sensacao de realismo:<br/>"
+        "• <b>1. Boca aberta e dentes expostos no silencio:</b> Modelos tradicionais de audio deixam a boca inerte e entreaberta "
+        "quando o som para. Resolvemos isso implementando uma camada de <b>Voice Activity Detection (VAD)</b> que forca "
+        "o fechamento labial estrito (vad_alpha = 0.0) na ausencia de voz.<br/>"
+        "• <b>2. Cabeca congelada (Colapso MSE):</b> Treinar modelos com erro medio quadratico faz o avatar paralisar a cabeca. "
+        "Superamos isso com a <b>Difusao Estocastica (MDM)</b>, que mantem micro-movimentos organicos continuos.<br/>"
+        "• <b>3. Avatar passivo que nao reage ao interlocutor:</b> Adotamos a dinamica diadica do <b>Audio2Photoreal (Meta)</b>, "
+        "onde o avatar assume o papel de ouvinte, selando a boca e balancando a cabeca afirmativamente (Head Nods) enquanto ouve.<br/>"
+        "• <b>4. Olhar fixo de teleprompter:</b> Implementamos o <b>Gaze Aversion do OmniHuman (ByteDance)</b>, no qual o avatar desvia "
+        "a cabeca e o olhar para cima/esquerda para 'pensar' antes de responder, simulando deliberacao cognitiva humana."
+    )
+    story.append(Paragraph(p_prob, style_body))
+    story.append(Spacer(1, 8))
+
+    # -------------------------------------------------------------------------
+    # 3. O QUE CADA MODELO ADICIONA (VISAO RAPIDA)
+    # -------------------------------------------------------------------------
+    story.append(Paragraph("3. O Que Cada Modelo Agrega na Pratica", style_h1))
+    
+    mods_texto = [
+        ("VASA-1 (Microsoft Research, 2024)", "Sintese holistica livre direto do som. Serve de referencia basal pura (sem controles adicionais)."),
+        ("AUHead (ICLR 2026)", "Controle de musculos faciais isolados (FACS). Permite franzir a testa em concentracao (AU04) ou abrir um grande sorriso genuino (AU12 + AU06)."),
+        ("InstructAvatar (AAAI 2025)", "Direcao cenica em linguagem natural ('postura altiva, queixo elevado') com fechamento labial automatico em pausas."),
+        ("Audio2Photoreal (Meta, CVPR 2024)", "Dialogo entre duas pessoas: o avatar escuta ativamente com acenos harmonicos de cabeca e boca 100% selada."),
+        ("OmniHuman-1.5 (ByteDance, 2025)", "Arquitetura de Dois Sistemas: reflexo fonetico rapido + mente deliberativa que desvia o olhar (Gaze Aversion) para refletir."),
+        ("Motion Diffusion Model (MDM, ICLR 2023)", "Quebra do colapso da pose media via amostragem estocastica livre, garantindo movimento vivo e solto."),
     ]
-    meta_table = Table(meta_data, colWidths=[90 * mm, 84 * mm])
-    meta_table.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, -1), colors.HexColor("#F8FAFC")),
-        ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor("#CBD5E1")),
-        ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor("#E2E8F0")),
-        ('TOPPADDING', (0, 0), (-1, -1), 2.5),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 2.5),
-        ('LEFTPADDING', (0, 0), (-1, -1), 5),
-        ('RIGHTPADDING', (0, 0), (-1, -1), 5),
-    ]))
-    story.append(meta_table)
+    for nome, desc in mods_texto:
+        story.append(Paragraph(f"• <b>{nome}:</b> {desc}", style_body))
+    story.append(PageBreak())
+
+    # -------------------------------------------------------------------------
+    # 4. A PROVA DE FOGO (COMPARATIVO UNIFICADO)
+    # -------------------------------------------------------------------------
+    story.append(Paragraph("4. O Experimento Mestre: 'A Prova de Fogo' (Grade 2x3)", style_h1))
+    story.append(Paragraph(
+        "Colocamos os 6 modelos lado a lado com a <b>exata mesma entrada</b> (audio de 9.69s com fala concentrada, "
+        "uma pausa critica de 2.2s de silencio absoluto, e um climax oratorio final). "
+        "Isso evidenciou com clareza visual o que cada modelo melhora:",
+        style_body
+    ))
     story.append(Spacer(1, 4))
 
-    # -------------------------------------------------------------------------
-    # 1. RESUMO EXECUTIVO
-    # -------------------------------------------------------------------------
-    story.append(Paragraph("1. Resumo Executivo e Contexto da Reuniao", style_h1))
-    p1 = (
-        "Este relatorio consolida os resultados experimentais da pesquisa e implementacao pratica de "
-        "avatares humanos foto-realistas guiados por audio e texto. O objetivo foi investigar, implementar "
-        "e estressar empiricamente as arquiteturas líderes do estado da arte (SOTA) mundial, identificando "
-        "as limitacoes de abordagens convencionais e estabelecendo as solucoes concretas para a criacao de "
-        "avatares vivos e de nivel comercial."
-    )
-    story.append(Paragraph(p1, style_body))
-
-    p2 = (
-        "<b>Principais Gargalos Identificados em Modelos Tradicionais:</b><br/>"
-        "• <b>O Problema dos Dentes Expostos / Boca Aberta no Silencio:</b> Modelos de regressao direta a partir do audio "
-        "mantem a boca semi-aberta e dentes a mostra quando o interlocutor silencia, gerando forte sensacao de 'uncanny valley'.<br/>"
-        "• <b>Cabeca Congelada (MSE Collapse):</b> Treinamentos com funcao de perda L1/L2 convergem para a pose media, "
-        "fazendo com que o avatar pareca paralisado.<br/>"
-        "• <b>Falta de Expressividade Muscular e Direcao:</b> Dificuldade de comandar intencoes emocionais ou teatrais sem deformar a identidade do rosto."
-    )
-    story.append(Paragraph(p2, style_body))
-
-    p3 = (
-        "<b>Solucao Implementada e Validada:</b> Construimos um pipeline modular com 8 frentes tecnicas. "
-        "Submetemos todos os 6 modelos generativos a um teste cego simultaneo ('A Prova de Fogo'), provando "
-        "que a combinacao de deteccao de atividade de voz (VAD), controle muscular FACS, direcionamento cenico e "
-        "difusao estocastica elimina por completo as falhas dos modelos convencionais."
-    )
-    story.append(Paragraph(p3, style_body))
-    story.append(Spacer(1, 4))
-
-    # -------------------------------------------------------------------------
-    # 2. ARQUITETURA BASE: ESPACO CANONICO 3D (LIVEPORTRAIT / DITTO CORE)
-    # -------------------------------------------------------------------------
-    story.append(Paragraph("2. Fundamento Arquitetural: Decomposicao em Espaco Latente (Modulo 01)", style_h1))
-    p_base = (
-        "O nucleo de sintese apoia-se no espaco canônico implícito introduzido pelo LivePortrait e encapsulado pelo Ditto (ACM MM 2025). "
-        "Diferente de abordagens baseadas em malhas 3D densas (FLAME) ou geracao direta de pixels (GANs puras), o sistema separa estritamente "
-        "o volume de aparencia estatica da deformacao dinamica:<br/>"
-        "• <b>Keypoints Implicitos:</b> O rosto e decomposto em 21 keypoints tridimensionais (x_c in R^{21 x 3}).<br/>"
-        "• <b>Atitude de Cabeca:</b> A rotacao 3D e parametrizada em SO(3) via matriz Euler R calculada sobre 66 bins continuos de pitch, yaw e roll.<br/>"
-        "• <b>Validacao Algebrica Rigorosa:</b> Comprovamos ortonormalidade exata na matriz de rotacao R^T R = I e det(R) = 1.000000, "
-        "garantindo que qualquer transformacao preserve os volumes e proporcoes craniofaciais originais sem distorcao de perspectiva."
-    )
-    story.append(Paragraph(p_base, style_body))
-    story.append(Spacer(1, 4))
-
-    # -------------------------------------------------------------------------
-    # 3. DETALHAMENTO DOS MODELOS DO ESTADO DA ARTE (MODULOS 02 A 07)
-    # -------------------------------------------------------------------------
-    story.append(Paragraph("3. Modelos do Estado da Arte Investigados e Implementados", style_h1))
-
-    # Modulo 02
-    story.append(Paragraph("3.1 VASA-1 (Microsoft Research, 2024) — Dinamica Holistica por Audio", style_h2))
-    story.append(Paragraph(
-        "Gera dinamicamente a pose da cabeca e a expressao facial livre a partir de representacoes acusticas HuBERT em um Latent Motion Diffusion Model (LMDM). "
-        "<b>Vantagem:</b> Nao depende de video guia (driving video). <b>Limitacao:</b> Nao possui controle deliberado; em momentos de silencio absoluto, "
-        "mantem a boca inerte com exposicao dentaria residual caso o audio contenha ruido de fundo.",
-        style_body
-    ))
-
-    # Modulo 03
-    story.append(Paragraph("3.2 AUHead (ICLR 2026) — Controle Muscular Anatomico via FACS", style_h2))
-    story.append(Paragraph(
-        "Mapeia Action Units anatomicas do sistema FACS (Paul Ekman) diretamente nos 21 keypoints de deformacao facial. "
-        "Permite acionar isoladamente musculos como o corrugador (AU04, franzir a testa), frontal lateral (AU02), zigomatico maior (AU12, sorriso) "
-        "e orbicular (AU06). <b>Resultado:</b> Em comparativo split-screen contra o VASA-1 neutro, gerou expressividade emocional nítida sem artefatos.",
-        style_body
-    ))
-
-    # Modulo 04
-    story.append(Paragraph("3.3 InstructAvatar (AAAI 2025) — Direcao Cenica NLP e Oclusao Labial", style_h2))
-    story.append(Paragraph(
-        "Interpreta diretivas cenicas em texto livre ('mantenha postura altiva, queixo elevado e confianca') e traduz semantica em poses e AUs. "
-        "<b>Solucao Crucial:</b> Introduz atenuacao labial adaptativa que garante fechamento bilabial nos fonemas consonantais (/p/, /b/, /m/) e "
-        "selamento absoluto dos labios em pausas, resolvendo a queixa de boca estática com dentes aparentes.",
-        style_body
-    ))
-
-    # Modulo 05
-    story.append(Paragraph("3.4 Audio2Photoreal (Meta Reality Labs, CVPR 2024) — Conversacao Diadica", style_h2))
-    story.append(Paragraph(
-        "Modela a dinamica social entre dois participantes (interlocutor e avatar). Divide o comportamento em dois estados:<br/>"
-        "• <i>Turno de Fala:</i> Articulacao fonetica normal orientada pelo som.<br/>"
-        "• <i>Turno de Escuta Ativa (Backchanneling):</i> O avatar detecta a fala alheia, sela completamente os labios em repouso neutro "
-        "e dispara acenos harmonicos afirmativos de cabeca (Head Nods com amplitude de +5.5 deg a 2.2 Hz) para demonstrar atencao.",
-        style_body
-    ))
-
-    # Modulo 06
-    story.append(Paragraph("3.5 OmniHuman-1.5 (ByteDance, 2025) — Arquitetura Cognitiva Dual", style_h2))
-    story.append(Paragraph(
-        "Inspirada na teoria dos Dois Sistemas de Daniel Kahneman: acopla o Sistema 1 reativo (sincronia fonetica direta) ao "
-        "Sistema 2 deliberativo (planejador de intencoes cognitivas). <b>Destaque:</b> Durante pausas reflexivas de raciocinio, "
-        "executa o fenômeno psicologico de <i>Gaze Aversion</i> (desvia a cabeca e o olhar Yaw = -9.0 deg e Pitch = -3.5 deg para pensar longe), "
-        "retornando ao foco frontal com o queixo erguido na conclusao assertiva.",
-        style_body
-    ))
-
-    # Modulo 07
-    story.append(Paragraph("3.6 Motion Diffusion Model (MDM / DDPM - ICLR 2023) — Difusao Cinematica", style_h2))
-    story.append(Paragraph(
-        "Supera a regressao deterministica MSE (problema '1-para-Muitos') formulando a geracao de movimento como amostragem estocastica reversa. "
-        "Prevê diretamente o sinal limpo x_hat_0 a partir do ruido com perdas geometricas de velocidade articular L_vel. "
-        "<b>Evidencia Empirica:</b> Eliminou o colapso a media (cabeca estatica), gerando diversidade angular de 3.72 deg entre sementes "
-        "mantendo sincronia labial identica (variacao fonetica de apenas 0.0045).",
-        style_body
-    ))
-    story.append(Spacer(1, 6))
-
-    # -------------------------------------------------------------------------
-    # 4. A PROVA DE FOGO (MODULO 08)
-    # -------------------------------------------------------------------------
-    story.append(KeepTogether([
-        Paragraph("4. O Experimento Comparativo Mestre: 'A Prova de Fogo' (Modulo 08)", style_h1),
-        Paragraph(
-            "Para colocar as arquiteturas a prova sob rigor cientifico idêntico, submetemos todos os 6 modelos generativos "
-            "a <b>exata mesma entrada condicional</b> (mesmo audio de fala de 9.69 segundos / 242 frames e mesmo retrato neutro), "
-            "renderizando-os lado a lado em uma grade 2x3 de alta resolucao (1920x1370 @ 25 FPS).",
-            style_body
-        ),
-        Paragraph(
-            "<b>Estrutura Trifásica do Teste:</b> "
-            "• <i>Fase 1 (0.0s a 2.4s):</i> Fala analitica ('Analise esta hipotese com atencao'); "
-            "• <i>Fase 2 (2.4s a 4.6s):</i> Pausa de 2.2s em silencio absoluto (prova da boca e do olhar); "
-            "• <i>Fase 3 (4.6s a 9.69s):</i> Clímax e conviccao ('Exatamente! Quando a mente imagina o futuro...').",
-            style_body
-        )
-    ]))
-    story.append(Spacer(1, 4))
-
-    # Tabela Comparativa de Resultados
+    # Tabela comparativa clean
     tbl_data = [
         [
-            Paragraph("<b>Modelo SOTA</b>", style_tbl_header),
-            Paragraph("<b>Fase 1: Foco</b>", style_tbl_header),
-            Paragraph("<b>Fase 2: Silencio (2.2s)</b>", style_tbl_header),
+            Paragraph("<b>Modelo</b>", style_tbl_header),
+            Paragraph("<b>Fase 1: Fala Inicial</b>", style_tbl_header),
+            Paragraph("<b>Fase 2: Silencio de 2.2s</b>", style_tbl_header),
             Paragraph("<b>Fase 3: Climax</b>", style_tbl_header),
-            Paragraph("<b>Diferencial Pratico Comprovado</b>", style_tbl_header),
+            Paragraph("<b>Diferencial Observado</b>", style_tbl_header),
         ],
         [
-            Paragraph("<b>VASA-1</b><br/>(Microsoft)", style_tbl_cell_bold),
+            Paragraph("<b>VASA-1</b>", style_tbl_cell_bold),
             Paragraph("Fala neutra direta.", style_tbl_cell),
-            Paragraph("<b>Passivo:</b> boca semi-aberta com resíduo dentario (sem VAD).", style_tbl_cell),
-            Paragraph("Articulacao comum sem intencao emocional.", style_tbl_cell),
-            Paragraph("Baseline holistico puro sem controle manual.", style_tbl_cell),
+            Paragraph("Boca semi-aberta passiva (sem VAD).", style_tbl_cell),
+            Paragraph("Fala comum sem intencao.", style_tbl_cell),
+            Paragraph("Baseline puro de comparacao.", style_tbl_cell),
         ],
         [
-            Paragraph("<b>AUHead</b><br/>(ICLR 2026)", style_tbl_cell_bold),
-            Paragraph("AU04 (0.85): cenho franzido evidente.", style_tbl_cell),
-            Paragraph("Relaxamento gradual muscular da glabela.", style_tbl_cell),
-            Paragraph("AU12 (0.85) + AU06: Grande sorriso de Duchenne.", style_tbl_cell),
-            Paragraph("Expressividade muscular facial cirurgica via FACS.", style_tbl_cell),
+            Paragraph("<b>AUHead</b>", style_tbl_cell_bold),
+            Paragraph("Cenho franzido (AU04=0.85).", style_tbl_cell),
+            Paragraph("Relaxamento gradual muscular.", style_tbl_cell),
+            Paragraph("Grande sorriso Duchenne (AU12).", style_tbl_cell),
+            Paragraph("Expressividade muscular cirurgica.", style_tbl_cell),
         ],
         [
-            Paragraph("<b>InstructAvatar</b><br/>(AAAI 2025)", style_tbl_cell_bold),
-            Paragraph("Pitch -4.5 deg: postura altiva.", style_tbl_cell),
-            Paragraph("<b>Labios 100% selados</b> (vad_alpha=0, zero dentes expostos).", style_tbl_cell),
-            Paragraph("Pitch -5.5 deg: presenca cenica oratoria ereta.", style_tbl_cell),
-            Paragraph("Direcao cenica teatral e prevencao de dentes aparentes.", style_tbl_cell),
+            Paragraph("<b>InstructAvatar</b>", style_tbl_cell_bold),
+            Paragraph("Postura ereta (Pitch -4.5 deg).", style_tbl_cell),
+            Paragraph("<b>Labios 100% selados (vad=0).</b>", style_tbl_cell),
+            Paragraph("Queixo erguido e oratoria firme.", style_tbl_cell),
+            Paragraph("Presenca de palco e boca fechada.", style_tbl_cell),
         ],
         [
-            Paragraph("<b>Audio2Photoreal</b><br/>(Meta CVPR)", style_tbl_cell_bold),
-            Paragraph("Turno de fala ativa inicial.", style_tbl_cell),
-            Paragraph("<b>Escuta Ativa:</b> 2 acenos nitidos (+5.5 deg) e boca selada.", style_tbl_cell),
-            Paragraph("Retomada suave de turno de fala sem corte.", style_tbl_cell),
-            Paragraph("Comportamento social: concorda acenando a cabeca.", style_tbl_cell),
+            Paragraph("<b>Audio2Photoreal</b>", style_tbl_cell_bold),
+            Paragraph("Turno de fala normal.", style_tbl_cell),
+            Paragraph("<b>2 Acenos claros (+5.5 deg) + boca selada.</b>", style_tbl_cell),
+            Paragraph("Retomada suave de conversa.", style_tbl_cell),
+            Paragraph("Escuta ativa (concorda acenando).", style_tbl_cell),
         ],
         [
-            Paragraph("<b>OmniHuman-1.5</b><br/>(ByteDance)", style_tbl_cell_bold),
-            Paragraph("Pitch +2.5 deg: compenetracao.", style_tbl_cell),
-            Paragraph("<b>Gaze Aversion:</b> vira cabeca (Yaw -9 deg, Pitch -3.5 deg).", style_tbl_cell),
-            Paragraph("Conviccao assertiva: foco central e queixo erguido.", style_tbl_cell),
-            Paragraph("Cognicao deliberativa: desvia o olhar para pensar.", style_tbl_cell),
+            Paragraph("<b>OmniHuman-1.5</b>", style_tbl_cell_bold),
+            Paragraph("Foco compenetrado inicial.", style_tbl_cell),
+            Paragraph("<b>Gaze Aversion: vira o rosto (-9 deg).</b>", style_tbl_cell),
+            Paragraph("Foco direto frontal e queixo alto.", style_tbl_cell),
+            Paragraph("Desvia o olhar para pensar.", style_tbl_cell),
         ],
         [
-            Paragraph("<b>Motion Diffusion</b><br/>(MDM / DDPM)", style_tbl_cell_bold),
+            Paragraph("<b>Motion Diffusion</b>", style_tbl_cell_bold),
             Paragraph("Cinematica estocastica viva.", style_tbl_cell),
-            Paragraph("Dinamica postural organica continua livre de rigidez.", style_tbl_cell),
-            Paragraph("Rica amplitude angular tridimensional livre do colapso.", style_tbl_cell),
-            Paragraph("Elimina a cabeca estatica / congelada do MSE.", style_tbl_cell),
+            Paragraph("Dinamica postural organica continua.", style_tbl_cell),
+            Paragraph("Rica amplitude angular tridimensional.", style_tbl_cell),
+            Paragraph("Elimina a cabeca congelada/rigida.", style_tbl_cell),
         ],
     ]
 
-    tbl_comp = Table(tbl_data, colWidths=[26 * mm, 32 * mm, 44 * mm, 34 * mm, 38 * mm])
+    tbl_comp = Table(tbl_data, colWidths=[24 * mm, 34 * mm, 44 * mm, 36 * mm, 36 * mm])
     tbl_comp.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#0F172A")),
         ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor("#334155")),
@@ -382,142 +310,47 @@ def gerar_relatorio_pdf(caminho_pdf: str):
         ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor("#FFFFFF"), colors.HexColor("#F8FAFC")]),
     ]))
     story.append(tbl_comp)
-    story.append(PageBreak())
+    story.append(Spacer(1, 8))
 
     # -------------------------------------------------------------------------
-    # 5. TABELA SINTETICA DE TODOS OS MODULOS
-    # -------------------------------------------------------------------------
-    story.append(Paragraph("5. Sintese de Entregas e Metricas de Todos os Modulos (01 a 08)", style_h1))
-    story.append(Paragraph(
-        "Todos os 8 modulos foram integralmente implementados com scripts Python reprodutiveis, "
-        "videos MP4 renderizados em alta definicao e demonstracoes GIF animadas:",
-        style_body
-    ))
-
-    tbl_sintese_data = [
-        [
-            Paragraph("<b>Modulo</b>", style_tbl_header),
-            Paragraph("<b>Modelo / Foco</b>", style_tbl_header),
-            Paragraph("<b>Duracao</b>", style_tbl_header),
-            Paragraph("<b>Resolucao</b>", style_tbl_header),
-            Paragraph("<b>Validacao / Metrica Chave</b>", style_tbl_header),
-        ],
-        [
-            Paragraph("<b>01</b>", style_tbl_cell_bold),
-            Paragraph("LivePortrait / Ditto Core", style_tbl_cell),
-            Paragraph("—", style_tbl_cell),
-            Paragraph("—", style_tbl_cell),
-            Paragraph("R^T R = I, det(R) = 1.000000 (Ortonormalidade)", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>02</b>", style_tbl_cell_bold),
-            Paragraph("VASA-1 (Microsoft)", style_tbl_cell),
-            Paragraph("9.84s (246f)", style_tbl_cell),
-            Paragraph("1024x1024", style_tbl_cell),
-            Paragraph("Pitch [-2.1 deg, +3.4 deg], Yaw [-4.2 deg, +3.8 deg]", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>03</b>", style_tbl_cell_bold),
-            Paragraph("AUHead FACS Solo & Comp", style_tbl_cell),
-            Paragraph("14.6s / 7.6s", style_tbl_cell),
-            Paragraph("1024x1024 / 2048x1024", style_tbl_cell),
-            Paragraph("AU04: -0.008 (glabela), AU12: +0.035 (sorriso)", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>04</b>", style_tbl_cell_bold),
-            Paragraph("InstructAvatar NLP", style_tbl_cell),
-            Paragraph("10.80s (270f)", style_tbl_cell),
-            Paragraph("1024x1024", style_tbl_cell),
-            Paragraph("Pitch: -2.5 deg, contato labial fechado preservado", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>05</b>", style_tbl_cell_bold),
-            Paragraph("Audio2Photoreal Diadico", style_tbl_cell),
-            Paragraph("14.68s (367f)", style_tbl_cell),
-            Paragraph("1024x1024", style_tbl_cell),
-            Paragraph("2 acenos a 2.2 Hz, labio 100% selado no repouso", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>06</b>", style_tbl_cell_bold),
-            Paragraph("OmniHuman-1.5 Dual", style_tbl_cell),
-            Paragraph("10.76s (269f)", style_tbl_cell),
-            Paragraph("1024x1024", style_tbl_cell),
-            Paragraph("Gaze aversion: Yaw -3.8 deg, Queixo erguido: -3.2 deg", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>07</b>", style_tbl_cell_bold),
-            Paragraph("Motion Diffusion (MDM)", style_tbl_cell),
-            Paragraph("12.48s (312f)", style_tbl_cell),
-            Paragraph("1024x1024", style_tbl_cell),
-            Paragraph("Diversidade: 3.72 deg, erro labial: 0.0045, jerk: 0.05", style_tbl_cell),
-        ],
-        [
-            Paragraph("<b>08</b>", style_tbl_cell_bold),
-            Paragraph("<b>Comparativo Mestre SOTA</b>", style_tbl_cell_bold),
-            Paragraph("<b>9.69s (242f)</b>", style_tbl_cell_bold),
-            Paragraph("<b>1920x1370</b>", style_tbl_cell_bold),
-            Paragraph("<b>Grade 2x3 simultanea com telemetria dos 6 modelos</b>", style_tbl_cell_bold),
-        ],
-    ]
-
-    tbl_sintese = Table(tbl_sintese_data, colWidths=[18 * mm, 46 * mm, 24 * mm, 38 * mm, 48 * mm])
-    tbl_sintese.setStyle(TableStyle([
-        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#1E293B")),
-        ('BOX', (0, 0), (-1, -1), 0.5, colors.HexColor("#334155")),
-        ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.HexColor("#E2E8F0")),
-        ('TOPPADDING', (0, 0), (-1, -1), 2.5),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 2.5),
-        ('LEFTPADDING', (0, 0), (-1, -1), 4),
-        ('RIGHTPADDING', (0, 0), (-1, -1), 4),
-        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.HexColor("#FFFFFF"), colors.HexColor("#F8FAFC")]),
-    ]))
-    story.append(tbl_sintese)
-    story.append(Spacer(1, 6))
-
-    # -------------------------------------------------------------------------
-    # 6. RECOMENDACOES PRATICAS PARA O PRODUTO E DECISAO DE ARQUITETURA
+    # 5. O QUE LEVAR PARA A REUNIAO / DECISAO DE PRODUTO
     # -------------------------------------------------------------------------
     story.append(KeepTogether([
-        Paragraph("6. Recomendacoes Tecnicas para Decisao de Produto", style_h1),
+        Paragraph("5. Recomendacoes Diretas para Decisao de Produto", style_h1),
         Paragraph(
-            "Com base nos testes empiricos, recomendamos as seguintes diretrizes para o pipeline de producao da empresa:",
+            "Se fossemos escolher a 'receita de bolo' ideal para colocar um avatar em producao hoje:",
             style_body
         ),
         Paragraph(
-            "<b>1. Adocao Obrigatoria do Modulo VAD para Oclusao Labial:</b> "
-            "Em qualquer solucao comercial, nenhum modelo puro de audio-to-motion deve ir para producao sem uma camada de "
-            "Voice Activity Detection (VAD) acoplada. A forca vad_alpha = 0.0 na presenca de silencio absoluto e a unica "
-            "garantia matematica de que a boca se selara de forma natural, eliminando a sensacao de dentes flutuantes.",
+            "<b>1. Camada VAD Obrigatoria:</b> Qualquer motor de fala precisa ter um limitador de VAD (Voice Activity Detection). "
+            "Se o usuario parou de falar ou o avatar fez uma pausa, o sistema deve zerar o deslocamento labial (vad_alpha = 0.0). "
+            "Isso acaba definitivamente com a impressao de boca aberta ou dentes flutuantes.",
             style_body
         ),
         Paragraph(
-            "<b>2. Arquitetura Hibrida Ideal por Caso de Uso:</b><br/>"
-            "• <b>Para Avatares Interativos / Assistentes em Tempo Real:</b> Integrar a abordagem do <b>Audio2Photoreal</b> "
-            "(Meta) com <b>InstructAvatar</b>. O avatar fala quando necessario e, ao ouvir o cliente, assume postura de escuta "
-            "ativa com boca selada e acenos afirmativos (Head Nods).<br/>"
-            "• <b>Para Apresentadores de Videos / Professores Virtuais:</b> Adotar a arquitetura cognitiva do <b>OmniHuman-1.5</b> "
-            "com modulacao muscular <b>AUHead</b>. A inclusao de Gaze Aversion (desvio reflexivo de olhar antes de responder) "
-            "e sorrisos de Duchenne remove a percepcao de 'robo lendo teleprompter' e transmite presenca de palco viva.<br/>"
-            "• <b>Para Eliminacao de Rigidez:</b> O backbone generativo deve utilizar amostragem estocastica (<b>Motion Diffusion / MDM</b>) "
-            "para garantir que poses longas nunca congelem.",
+            "<b>2. Para Assistentes e Atendimento Interativo:</b> Adotar a dinamica do <b>Audio2Photoreal + InstructAvatar</b>. "
+            "O avatar escuta o cliente acenando com a cabeca e mantem os labios fechados. Isso gera empatia imediata.",
             style_body
         ),
         Paragraph(
-            "<b>3. Custo Computacional e Latencia:</b> "
-            "A inferencia modular no Apple Silicon (GPU MPS) alcancou geracao de 25 FPS com facilidade na etapa de keypoints, "
-            "com a renderizacao SPADE/Warp completando 242 frames em cerca de 4 minutos por avatar full-HD. O pipeline e viavel "
-            "tanto para pre-renderizacao quanto para servidores com aceleracao CUDA.",
+            "<b>3. Para Aulas e Apresentacoes Longas:</b> Usar a arquitetura cognitiva do <b>OmniHuman-1.5 com AUHead</b>. "
+            "O desvio de olhar reflexivo (Gaze Aversion) antes de responder duvidas e os sorrisos em momentos-chave removem a "
+            "sensacao de 'robo lendo texto'.",
+            style_body
+        ),
+        Paragraph(
+            "<b>4. Viabilidade Tecnica:</b> Todo o pipeline roda em tempo real na etapa de keypoints e levou ~4 minutos para renderizar "
+            "10 segundos de video full-HD no chip Apple Silicon via GPU MPS. E perfeitamente escalavel em servidores de producao.",
             style_body
         ),
         Spacer(1, 6),
         HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#CBD5E1"), spaceAfter=5),
-        Paragraph("<b>Relatorio elaborado por:</b> Cleiver Junior | Engenharia e Pesquisa de IA", style_body),
-        Paragraph("<b>Repositorio de Codigo e Artefatos:</b> github.com/CleiverJr/Experimentos-Avatar-01-Humans", style_body)
+        Paragraph("<b>Relatorio de Pesquisa Trilha D</b> | Cleiver Junior | Experimentos Avatar 01 Humans", style_body),
+        Paragraph("Videos, codigos e demonstracoes GIF: github.com/CleiverJr/Experimentos-Avatar-01-Humans", style_body)
     ]))
 
-    # Compilar PDF
     doc.build(story, canvasmaker=NumberedCanvas)
-    print(f"Relatorio PDF gerado com sucesso em: {caminho_pdf}")
+    print(f"Relatorio PDF clean gerado com sucesso em: {caminho_pdf}")
 
 
 if __name__ == "__main__":
