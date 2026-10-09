@@ -34,9 +34,9 @@ CONFIG_MODELOS = [
         "sub": "Dinamica Holistica Livre por Audio",
         "npz": "trajetoria_02_vasa1.npz",
         "pos": (0, 0),  # linha 0, col 0
-        "fase1": "Fala neutra e articulacao direta",
-        "fase2": "Sem audio: repouso passivo",
-        "fase3": "Movimento sonoro comum sem intencao"
+        "fase1": "Prosodia pura: fala neutra direta",
+        "fase2": "Sem audio: boca semi-aberta (sem VAD)",
+        "fase3": "Movimento padrao sem controle dirigido"
     },
     {
         "id": "auhead",
@@ -44,9 +44,9 @@ CONFIG_MODELOS = [
         "sub": "Controle Muscular Anatomico FACS",
         "npz": "trajetoria_03_auhead.npz",
         "pos": (0, 1),  # linha 0, col 1
-        "fase1": "AU04 (Corrugador): Foco e cenho franzido",
-        "fase2": "Repouso facial muscular",
-        "fase3": "AU12 (Zigomatico): Sorriso genuino"
+        "fase1": "AU04 (0.85): Cenho franzido & foco analitico",
+        "fase2": "Relaxamento muscular da glabela",
+        "fase3": "AU12 (0.85) + AU06: Grande sorriso Duchenne"
     },
     {
         "id": "instruct",
@@ -54,9 +54,9 @@ CONFIG_MODELOS = [
         "sub": "Direcao Cenica NLP & Oclusao Labial",
         "npz": "trajetoria_04_instruct.npz",
         "pos": (0, 2),  # linha 0, col 2
-        "fase1": "Postura altiva e confianca (Pitch = -2°)",
-        "fase2": "Labios selados (sem dentes expostos)",
-        "fase3": "Climax assertivo e fonacao limpa"
+        "fase1": "Postura altiva: Queixo elevado (Pitch -4.5 deg)",
+        "fase2": "Silencio: Labios selados (vad_alpha=0)",
+        "fase3": "Presenca cenica ereta (Pitch -5.5 deg)"
     },
     {
         "id": "audio2photoreal",
@@ -64,9 +64,9 @@ CONFIG_MODELOS = [
         "sub": "Conversacao Diadica & Backchanneling",
         "npz": "trajetoria_05_audio2photoreal.npz",
         "pos": (1, 0),  # linha 1, col 0
-        "fase1": "Turno de fala ativa inicial",
-        "fase2": "Escuta Ativa: 2 Acenos (Nodding) + Boca Selada",
-        "fase3": "Retomada fluida de turno"
+        "fase1": "Turno de fala inicial ativo",
+        "fase2": "Escuta Ativa: 2 Acenos (+5.5 deg) & Boca Selada",
+        "fase3": "Retomada suave de turno conversacional"
     },
     {
         "id": "omnihuman",
@@ -74,9 +74,9 @@ CONFIG_MODELOS = [
         "sub": "Arquitetura Dual (Sistema 1 + Sistema 2)",
         "npz": "trajetoria_06_omnihuman.npz",
         "pos": (1, 1),  # linha 1, col 1
-        "fase1": "Arco 1: Pensamento analitico concentrado",
-        "fase2": "Arco 2: Gaze Aversion (Desvio de Olhar)",
-        "fase3": "Arco 3: Queixo elevado e conviccao"
+        "fase1": "Sistema 2: Pensamento concentrado (Pitch +2.5 deg)",
+        "fase2": "Gaze Aversion deliberativo: Yaw -9 deg, Pitch -3.5 deg",
+        "fase3": "Conviccao: Foco frontal direto e queixo alto"
     },
     {
         "id": "mdm",
@@ -84,9 +84,9 @@ CONFIG_MODELOS = [
         "sub": "Difusao Estocastica (Anti-Colapso a Media)",
         "npz": "trajetoria_07_mdm.npz",
         "pos": (1, 2),  # linha 1, col 2
-        "fase1": "Amostragem DDPM: Pose dinamica viva",
-        "fase2": "Micro-cinematica estocastica de cabeca",
-        "fase3": "Energia angular livre do colapso MSE"
+        "fase1": "DDPM Sampling: Cinematica viva anti-colapso",
+        "fase2": "Dinamica postural organica continua",
+        "fase3": "Rica amplitude angular livre da media"
     }
 ]
 
