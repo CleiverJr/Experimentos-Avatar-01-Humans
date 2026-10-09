@@ -37,6 +37,8 @@ dist/
 **/runs/
 **/temp/
 **/tmp/
+**/frames_*/
+*.pkl
 *.swp
 *~
 

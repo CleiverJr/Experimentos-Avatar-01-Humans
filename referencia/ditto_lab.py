@@ -221,16 +221,19 @@ class Lab:
 # ---------------------------------------------------------------------------
 class Renderer:
     """Só warp + decoder + putback. Leve o suficiente para rodar em outra máquina."""
-    def __init__(self, threads=None, bf16=False):
+    def __init__(self, threads=None, bf16=False, device=None):
         import torch
         if threads:
             torch.set_num_threads(threads)
+        if device is None:
+            device = "mps" if torch.backends.mps.is_available() else "cpu"
+        self.device = device
         from core.atomic_components.warp_f3d import WarpF3D
         from core.atomic_components.decode_f3d import DecodeF3D
         from core.atomic_components.putback import PutBack
         root = os.path.join(DITTO_DIR, "checkpoints/ditto_pytorch/models")
-        self.warp = WarpF3D({"model_path": os.path.join(root, "warp_network.pth"), "device": "cpu"})
-        self.dec = DecodeF3D({"model_path": os.path.join(root, "decoder.pth"), "device": "cpu"})
+        self.warp = WarpF3D({"model_path": os.path.join(root, "warp_network.pth"), "device": self.device})
+        self.dec = DecodeF3D({"model_path": os.path.join(root, "decoder.pth"), "device": self.device})
         self.putback = PutBack()
         self.bf16 = bf16
 
@@ -245,13 +248,13 @@ class Renderer:
         N = len(x_d_all)
         end = N if end is None else min(end, N)
         nsrc = len(st["f_s"])
-        ctx = torch.autocast("cpu", dtype=torch.bfloat16) if self.bf16 else _null()
+        ctx = torch.autocast("cpu", dtype=torch.bfloat16) if (self.bf16 and self.device == "cpu") else _null()
         for i in range(start, end):
             p = os.path.join(out_dir, f"{i:05d}.jpg")
             if os.path.exists(p):
                 continue
             fi = i % nsrc
-            with ctx:
+            with ctx, torch.no_grad():
                 f3d = self.warp(st["f_s"][fi], x_s_all[i][None], x_d_all[i][None])
                 img = self.dec(f3d)
             if full:
