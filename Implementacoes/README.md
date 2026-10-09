@@ -1,6 +1,6 @@
 # Implementações Manuais — Catálogo de Módulos e Resultados
 
-Esta pasta reúne a implementação manual dos 7 módulos investigados no projeto, desde os fundamentos geométricos e anatômicos até difusão de movimento e simulação cognitiva dual.
+Esta pasta reúne a implementação manual dos módulos investigados no projeto, desde os fundamentos geométricos e anatômicos até difusão de movimento, simulação cognitiva dual e o comparativo mestre SOTA.
 
 ---
 
@@ -15,6 +15,7 @@ Esta pasta reúne a implementação manual dos 7 módulos investigados no projet
 | **05_audio2photoreal_dialogue** | Audio2Photoreal (Meta) | [`audio2photoreal_diadico.py`](05_audio2photoreal_dialogue/audio2photoreal_diadico.py) | [`renderizar_video_diadico.py`](05_audio2photoreal_dialogue/renderizar_video_diadico.py) | `trajetoria_diadica.npz` | [`video_diadico.mp4`](05_audio2photoreal_dialogue/video_diadico.mp4)<br>*(14.68s \| 367 frames)* | Escuta ativa (*backchannel*), VAD acústico e acenos de cabeça com boca selada. |
 | **06_omnihuman_dual_system** | OmniHuman-1.5 (ByteDance) | [`omnihuman_sistema_dual.py`](06_omnihuman_dual_system/omnihuman_sistema_dual.py) | [`renderizar_video_omnihuman.py`](06_omnihuman_dual_system/renderizar_video_omnihuman.py) | `trajetoria_omnihuman.npz` | [`video_omnihuman.mp4`](06_omnihuman_dual_system/video_omnihuman.mp4)<br>*(10.76s \| 269 frames)* | Sistema 1 (fonação HuBERT) + Sistema 2 (arcos de intenção cênica e *gaze aversion*). |
 | **07_motion_diffusion_mdm** | MDM (ICLR 2023) & DDPM | [`mdm_difusao_cinematica.py`](07_motion_diffusion_mdm/mdm_difusao_cinematica.py) | [`renderizar_video_mdm.py`](07_motion_diffusion_mdm/renderizar_video_mdm.py) | `trajetoria_mdm.npz` | [`video_mdm.mp4`](07_motion_diffusion_mdm/video_mdm.mp4)<br>*(12.48s \| 312 frames)* | Difusão estocástica reversa, predição direta $\hat{x}_0$ e quebra da regressão à média. |
+| **08_comparativo_mestre_sota** | Comparativo Mestre SOTA | [`gerar_trajetorias_comparativo.py`](08_comparativo_mestre_sota/gerar_trajetorias_comparativo.py) | [`renderizar_grade_comparativa.py`](08_comparativo_mestre_sota/renderizar_grade_comparativa.py) | 6 arquivos `.npz` calibrados | [`video_comparativo_mestre.mp4`](08_comparativo_mestre_sota/video_comparativo_mestre.mp4)<br>*(9.69s \| 1920x1370)* | Grade 2x3 com inferência simultânea de todos os 6 modelos SOTA na Prova de Fogo. |
 
 ---
 
@@ -55,3 +56,7 @@ Esta pasta reúne a implementação manual dos 7 módulos investigados no projet
   - Diversidade Angular de Cabeça (Diversity): $3.720^\circ$ (poses vivas e variadas para a mesma frase);
   - Consistência Labial Fonética: $0.0045$ (fidelidade estrita da articulação de boca);
   - Suavidade Cinemática: $0.0537^\circ/\text{frame}^2$ (movimento contínuo e sem tremores).
+
+### Módulo 08 — Comparativo Mestre SOTA (A Prova de Fogo)
+- **Foco:** Inferência simultânea dos 6 modelos em grade 2x3 (1920x1370) submetidos ao mesmo prompt de 3 fases (foco, silêncio de 2.2s e clímax).
+- **Resultados:** Evidência visual direta da superioridade de cada técnica: VASA-1 como baseline acústico, AUHead controlando músculos específicos, InstructAvatar eliminando dentes expostos, Audio2Photoreal acenando com boca selada na escuta, OmniHuman desviando o olhar para pensar (*gaze aversion*), e MDM garantindo movimento estocástico vivo sem colapsar para a média estática.

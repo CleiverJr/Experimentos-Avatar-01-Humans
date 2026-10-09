@@ -6,7 +6,33 @@ O projeto investiga os princípios de modelos do estado da arte (SOTA): desde a 
 
 ---
 
-## Modulos e Demonstracoes
+## Comparativo Geral SOTA: A Prova de Fogo de Todos os Modelos
+
+Para comparar diretamente as arquiteturas, os 6 modelos generativos foram submetidos a **exata mesma entrada ("Prova de Fogo")** e renderizados lado a lado em uma grade 2x3 de alta resolucao (1920x1370 @ 25 FPS):
+- **Audio Unificado:** `data/prova_de_fogo.wav` (9.69s | 242 frames);
+- **Fase 1 (0.0s a 2.4s):** Analise e Foco (*"Analise esta hipotese com atencao."*);
+- **Fase 2 (2.4s a 4.6s):** Pausa Reflexiva de 2.2s em Silencio Absoluto (Teste critico de boca e olhar);
+- **Fase 3 (4.6s a 9.69s):** Climax e Conviccao (*"Exatamente! Quando a mente imagina o futuro, a inteligencia ganha vida!"*).
+
+![Comparativo Mestre SOTA](Implementacoes/08_comparativo_mestre_sota/demo_comparativo_mestre.gif)
+
+- **Video Completo em HD (1920x1370 com Audio):** [Implementacoes/08_comparativo_mestre_sota/video_comparativo_mestre.mp4](Implementacoes/08_comparativo_mestre_sota/video_comparativo_mestre.mp4)
+- **Documentacao Completa do Teste:** [Implementacoes/08_comparativo_mestre_sota/README.md](Implementacoes/08_comparativo_mestre_sota/README.md)
+
+### O Que Cada Modelo Melhora na Prova de Fogo:
+
+| Modelo SOTA | Fase 1: Foco Analitico | Fase 2: Silencio (Prova da Boca e Olhar) | Fase 3: Conviccao e Climax | O Que Este Modelo Aprimora |
+| :--- | :--- | :--- | :--- | :--- |
+| **VASA-1** | Articulacao fonetica basal neutra. | **Passivo:** Cabeca e rosto praticamente congelados sem som. | Articulacao comum sem intencao emocional. | **Baseline holistico:** Gera movimento espontaneo a partir do audio sem driving video externo. |
+| **AUHead** | Ativacao muscular do corrugador (AU04), franzindo a glabela. | Retorno a posicao muscular basal em repouso. | Sorriso de Duchenne com zigomatico maior (AU12) e orbicular (AU06). | **Controle anatomico:** Permite controle muscular isolado e cirurgico via FACS de Paul Ekman. |
+| **InstructAvatar** | Postura altiva ($\text{Pitch} = -2^\circ$) e olhar firme. | **Labios selados:** A atenuacao adaptativa impede exposicao dentaria. | Postura afirmativa e queixo erguido com articulacao labial livre. | **Direcao cenica:** Interpreta linguagem natural livre sem travar a mandibula e os dentes. |
+| **Audio2Photoreal** | Fala ativa em turno conversacional. | **Escuta Ativa:** Dispara 2 acenos harmonicos (*nodding* a $2.2\text{ Hz}$) com boca 100% selada. | Retomada fluida de turno de fala sem descontinuidade. | **Comportamento social:** Simula a dinamica real de conversa diadica com feedback nao-verbal. |
+| **OmniHuman-1.5** | Arco 1: Foco introspectivo compenetrado ($\text{Pitch} = +1.2^\circ$). | **Gaze Aversion:** Desvia o olhar e a cabeca para cima/esquerda para pensar. | Arco 3: Elevacao assertiva de queixo ($\Delta \text{Pitch} = -3.2^\circ$) e olhar direto. | **Mente ativa:** Introduz simulacao cognitiva deliberativa (Sistema 1 + Sistema 2). |
+| **MDM (Diffusion)** | Amostragem estocastica com dinamica viva. | Micro-variacoes cinematicas naturais continuas. | Ampla dispersao angular da cabeca livre do colapso estatistico a media. | **Anti-colapso a media:** Elimina a cabeca congelada gerada por modelos de regressao MSE. |
+
+---
+
+## Modulos Individuais e Demonstracoes
 
 Cada modulo possui documentacao teorica e matematica aprofundada dentro de sua respectiva pasta em `Implementacoes/`.
 
@@ -110,6 +136,7 @@ Cada modulo possui documentacao teorica e matematica aprofundada dentro de sua r
 | **05** | Audio2Photoreal Diadico | 14.68s | 367 | 1024x1024 | 2 acenos ($2.2\text{ Hz}$), boca selada em repouso |
 | **06** | OmniHuman-1.5 Dual | 10.76s | 269 | 1024x1024 | Desvio de olhar: $-3.8^\circ$, queixo: $-3.2^\circ$ |
 | **07** | Motion Diffusion MDM | 12.48s | 312 | 1024x1024 | Diversidade: $3.720^\circ$, fidelidade labial: $0.0045$ |
+| **08** | **Comparativo Geral SOTA** | **9.69s** | **242** | **1920x1370** | **Grade 2x3 simultanea de todos os 6 modelos SOTA** |
 
 ---
 
@@ -119,9 +146,9 @@ Cada modulo possui documentacao teorica e matematica aprofundada dentro de sua r
 # 1. Ativar o ambiente com PyTorch e aceleracao MPS
 conda activate safeai
 
-# 2. Executar qualquer modulo (exemplo Modulo 07)
-python Implementacoes/07_motion_diffusion_mdm/mdm_difusao_cinematica.py
-python Implementacoes/07_motion_diffusion_mdm/renderizar_video_mdm.py
+# 2. Executar o comparativo geral de todos os modelos
+python Implementacoes/08_comparativo_mestre_sota/gerar_trajetorias_comparativo.py
+python Implementacoes/08_comparativo_mestre_sota/renderizar_grade_comparativa.py
 ```
 
 Consulte o README interno de cada modulo para instrucoes detalhadas e referencias de codigo.
