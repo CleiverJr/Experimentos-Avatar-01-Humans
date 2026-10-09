@@ -6,32 +6,6 @@ O projeto investiga os princípios de modelos do estado da arte (SOTA): desde a 
 
 ---
 
-## Comparativo Geral SOTA: A Prova de Fogo de Todos os Modelos
-
-Para comparar diretamente as arquiteturas, os 6 modelos generativos foram submetidos a **exata mesma entrada ("Prova de Fogo")** e renderizados lado a lado em uma grade 2x3 de alta resolucao (1920x1370 @ 25 FPS):
-- **Audio Unificado:** `data/prova_de_fogo.wav` (9.69s | 242 frames);
-- **Fase 1 (0.0s a 2.4s):** Analise e Foco (*"Analise esta hipotese com atencao."*);
-- **Fase 2 (2.4s a 4.6s):** Pausa Reflexiva de 2.2s em Silencio Absoluto (Teste critico de boca e olhar);
-- **Fase 3 (4.6s a 9.69s):** Climax e Conviccao (*"Exatamente! Quando a mente imagina o futuro, a inteligencia ganha vida!"*).
-
-![Comparativo Mestre SOTA](Implementacoes/08_comparativo_mestre_sota/demo_comparativo_mestre.gif)
-
-- **Video Completo em HD (1920x1370 com Audio):** [Implementacoes/08_comparativo_mestre_sota/video_comparativo_mestre.mp4](Implementacoes/08_comparativo_mestre_sota/video_comparativo_mestre.mp4)
-- **Documentacao Completa do Teste:** [Implementacoes/08_comparativo_mestre_sota/README.md](Implementacoes/08_comparativo_mestre_sota/README.md)
-
-### O Que Cada Modelo Melhora na Prova de Fogo:
-
-| Modelo SOTA | Fase 1: Foco Analitico | Fase 2: Silencio (Prova da Boca e Olhar) | Fase 3: Conviccao e Climax | O Que Este Modelo Aprimora |
-| :--- | :--- | :--- | :--- | :--- |
-| **VASA-1** | Articulacao fonetica basal neutra. | **Passivo:** Boca semi-aberta com exposicao dentaria residual (sem VAD). | Articulacao comum sem intencao emocional. | **Baseline holistico:** Referencia de partida sem intervencao comportamental externa. |
-| **AUHead** | Ativacao muscular do corrugador (AU04 = 0.85): cenho franzido evidente. | Relaxamento gradual das Action Units faciais. | Sorriso Duchenne radiante com zigomatico (AU12 = 0.85) e orbicular (AU06 = 0.65). | **Controle anatomico:** Expressividade muscular cirurgica e sorriso aberto genuino via FACS. |
-| **InstructAvatar** | Postura altiva de orador com queixo elevado ($\text{Pitch} = -4.5^\circ$). | **Labios selados:** `vad_alpha = 0.0` com boca 100% ocluida e fechada. | Presenca cenica imponente ($\text{Pitch} = -5.5^\circ$) e articulacao clara. | **Direcao cenica:** Postura de palco teatral e prevencao de boca entreaberta via NLP. |
-| **Audio2Photoreal** | Fala ativa em turno conversacional. | **Escuta Ativa:** Dispara 2 acenos nitidos (*nodding* $\Delta \text{Pitch} = +5.5^\circ$) com boca 100% selada. | Retomada fluida de turno de fala sem descontinuidade. | **Comportamento social:** Balanca a cabeca em concordancia diadica durante o silencio. |
-| **OmniHuman-1.5** | Arco 1: Foco introspectivo compenetrado ($\text{Pitch} = +2.5^\circ$). | **Gaze Aversion Notavel:** Vira cabeca e olhar para esquerda/cima ($\text{Yaw} = -9.0^\circ$, $\text{Pitch} = -3.5^\circ$). | Arco 3: Elevacao assertiva de queixo ($\text{Pitch} = -4.5^\circ$) e olhar direto. | **Cognicao deliberativa:** Simula pensamento e desvio de olhar reflexivo antes da resposta. |
-| **MDM (Diffusion)** | Amostragem estocastica com cinematica viva. | Dinamica postural organica continua livre de rigidez. | Ampla dispersao angular tridimensional livre do colapso estatistico a media. | **Anti-colapso a media:** Movimentacao angular continua, rica e natural. |
-
----
-
 ## Modulos Individuais e Demonstracoes
 
 Cada modulo possui documentacao teorica e matematica aprofundada dentro de sua respectiva pasta em `Implementacoes/`.
@@ -137,6 +111,32 @@ Cada modulo possui documentacao teorica e matematica aprofundada dentro de sua r
 | **06** | OmniHuman-1.5 Dual | 10.76s | 269 | 1024x1024 | Desvio de olhar: $-3.8^\circ$, queixo: $-3.2^\circ$ |
 | **07** | Motion Diffusion MDM | 12.48s | 312 | 1024x1024 | Diversidade: $3.720^\circ$, fidelidade labial: $0.0045$ |
 | **08** | **Comparativo Geral SOTA** | **9.69s** | **242** | **1920x1370** | **Grade 2x3 simultanea de todos os 6 modelos SOTA** |
+
+---
+
+## Modulo 08: Comparativo Geral SOTA — A Prova de Fogo de Todos os Modelos
+
+Para comparar diretamente as arquiteturas, os 6 modelos generativos foram submetidos a **exata mesma entrada ("Prova de Fogo")** e renderizados lado a lado em uma grade 2x3 de alta resolucao (1920x1370 @ 25 FPS):
+- **Audio Unificado:** `data/prova_de_fogo.wav` (9.69s | 242 frames);
+- **Fase 1 (0.0s a 2.4s):** Analise e Foco (*"Analise esta hipotese com atencao."*);
+- **Fase 2 (2.4s a 4.6s):** Pausa Reflexiva de 2.2s em Silencio Absoluto (Teste critico de boca e olhar);
+- **Fase 3 (4.6s a 9.69s):** Climax e Conviccao (*"Exatamente! Quando a mente imagina o futuro, a inteligencia ganha vida!"*).
+
+![Comparativo Mestre SOTA](Implementacoes/08_comparativo_mestre_sota/demo_comparativo_mestre.gif)
+
+- **Video Completo em HD (1920x1370 com Audio):** [Implementacoes/08_comparativo_mestre_sota/video_comparativo_mestre.mp4](Implementacoes/08_comparativo_mestre_sota/video_comparativo_mestre.mp4)
+- **Documentacao Completa do Teste:** [Implementacoes/08_comparativo_mestre_sota/README.md](Implementacoes/08_comparativo_mestre_sota/README.md)
+
+### O Que Cada Modelo Melhora na Prova de Fogo:
+
+| Modelo SOTA | Fase 1: Foco Analitico | Fase 2: Silencio (Prova da Boca e Olhar) | Fase 3: Conviccao e Climax | O Que Este Modelo Aprimora |
+| :--- | :--- | :--- | :--- | :--- |
+| **VASA-1** | Articulacao fonetica basal neutra. | **Passivo:** Boca semi-aberta com exposicao dentaria residual (sem VAD). | Articulacao comum sem intencao emocional. | **Baseline holistico:** Referencia de partida sem intervencao comportamental externa. |
+| **AUHead** | Ativacao muscular do corrugador (AU04 = 0.85): cenho franzido evidente. | Relaxamento gradual das Action Units faciais. | Sorriso Duchenne radiante com zigomatico (AU12 = 0.85) e orbicular (AU06 = 0.65). | **Controle anatomico:** Expressividade muscular cirurgica e sorriso aberto genuino via FACS. |
+| **InstructAvatar** | Postura altiva de orador com queixo elevado ($\text{Pitch} = -4.5^\circ$). | **Labios selados:** `vad_alpha = 0.0` com boca 100% ocluida e fechada. | Presenca cenica imponente ($\text{Pitch} = -5.5^\circ$) e articulacao clara. | **Direcao cenica:** Postura de palco teatral e prevencao de boca entreaberta via NLP. |
+| **Audio2Photoreal** | Fala ativa em turno conversacional. | **Escuta Ativa:** Dispara 2 acenos nitidos (*nodding* $\Delta \text{Pitch} = +5.5^\circ$) com boca 100% selada. | Retomada fluida de turno de fala sem descontinuidade. | **Comportamento social:** Balanca a cabeca em concordancia diadica durante o silencio. |
+| **OmniHuman-1.5** | Arco 1: Foco introspectivo compenetrado ($\text{Pitch} = +2.5^\circ$). | **Gaze Aversion Notavel:** Vira cabeca e olhar para esquerda/cima ($\text{Yaw} = -9.0^\circ$, $\text{Pitch} = -3.5^\circ$). | Arco 3: Elevacao assertiva de queixo ($\text{Pitch} = -4.5^\circ$) e olhar direto. | **Cognicao deliberativa:** Simula pensamento e desvio de olhar reflexivo antes da resposta. |
+| **MDM (Diffusion)** | Amostragem estocastica com cinematica viva. | Dinamica postural organica continua livre de rigidez. | Ampla dispersao angular tridimensional livre do colapso estatistico a media. | **Anti-colapso a media:** Movimentacao angular continua, rica e natural. |
 
 ---
 
