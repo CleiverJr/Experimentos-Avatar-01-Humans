@@ -1,19 +1,19 @@
 # Experimentos Avatar 01 — Humans
 
-Repositório de pesquisa científica e implementações práticas para **síntese, animação neural foto-realista e controle comportamental de avatares humanos** a partir de áudio de fala e linguagem natural.
+Repositório de pesquisa científica e implementações práticas para síntese, animação neural foto-realista e controle comportamental de avatares humanos a partir de áudio de fala e linguagem natural.
 
 O projeto investiga os princípios de modelos do estado da arte (SOTA): desde a cinemática de deformação canônica em espaços latentes 3D até a modelagem generativa por difusão estocástica e arquiteturas cognitivas duais.
 
 ---
 
-## Nota Tecnica sobre a Abordagem: Engenharia Reversa e Emulacao Pratica
+## Detalhe Importante: Natureza dos Modelos e Abordagem Pratica
 
-E fundamental pontuar a realidade tecnica deste segmento: a grande maioria dos modelos de ponta estudados (**VASA-1** da Microsoft Research, **OmniHuman-1.5** da ByteDance, **Audio2Photoreal** da Meta Reality Labs, **InstructAvatar** e **AUHead**) **nao possuem codigo-fonte nem pesos liberados publicamente** pelas empresas.
+Os modelos como Vasa-1 da Microsoft, Omnihuman-1.5 da ByteDance, Audio2Photoreal da Meta e InstructAvatar não possuem pesos e códigos-fonte liberados publicamente. O motivo justificado oficialmente pelas empresas para não liberarem os modelos é devido ao risco de uso indevido para geração de deepfakes.
 
-Por esse motivo, o trabalho aqui realizado consiste em uma **engenharia pragmatica controlada**:
-1. Utilizamos a espinha dorsal de codigo aberto do **LivePortrait / Ditto (ACM MM 2025)** como motor neural e espaco latente compartilhado (21 keypoints 3D implicitos e rotacao em $\mathrm{SO}(3)$);
-2. Implementamos e acoplamos diretamente sobre essa base os mecanismos matematicos e diretivas comportamentais descritos em cada paper (o LMDM, as Action Units FACS, a oclusao labial por VAD, os acenos diadicos, o Gaze Aversion cognitivo e a difusao estocastica reversa);
-3. Dessa forma, conseguimos simular, testar e comparar empiricamente as contribuicoes de cada modelo sob condicoes rigorosamente identicas, mesmo sem acesso aos modelos proprietarios fechados.
+Portanto, esses experimentos foram, de certa forma, uma "gambiarra" técnica para conseguir reproduzir e testar esses SOTAs:
+1. Adotamos o motor de código aberto do LivePortrait / Ditto (ACM MM 2025) como espaço latente e base anatômica compartilhada (21 keypoints 3D implícitos e rotação em $\mathrm{SO}(3)$);
+2. Implementamos e acoplamos diretamente sobre essa base os mecanismos matemáticos, o controle muscular FACS, a oclusão labial por VAD, os acenos diádicos de escuta ativa, o Gaze Aversion cognitivo e a difusão estocástica descritos em cada artigo;
+3. Isso permitiu simular, testar e comparar diretamente o que cada ideia melhora sob condições rigorosamente idênticas.
 
 ---
 
@@ -109,25 +109,9 @@ Cada modulo possui documentacao teorica e matematica aprofundada dentro de sua r
 
 ---
 
-## Tabela Sintetica de Resultados
-
-| Modulo | Modelo | Duracao | Frames | Resolucao | Metrica Chave |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **01** | LivePortrait Core | — | — | — | $\mathbf{R}^T\mathbf{R} = \mathbf{I}$, $\det(\mathbf{R}) = 1.000$ |
-| **02** | VASA-1 (Microsoft) | 9.84s | 246 | 1024x1024 | Pitch $[-2.1^\circ, +3.4^\circ]$, Yaw $[-4.2^\circ, +3.8^\circ]$ |
-| **03** | AUHead FACS Solo | 14.60s | 365 | 1024x1024 | AU04: $-0.008$, AU12: $+0.035$ |
-| **03** | Comparativo Split-Screen | 7.64s | 191 | 2048x1024 | Comparativo lado a lado VASA-1 vs AUHead |
-| **04** | InstructAvatar NLP | 10.80s | 270 | 1024x1024 | Pitch: $-2.5^\circ$, contato labial preservado |
-| **05** | Audio2Photoreal Diadico | 14.68s | 367 | 1024x1024 | 2 acenos ($2.2\text{ Hz}$), boca selada em repouso |
-| **06** | OmniHuman-1.5 Dual | 10.76s | 269 | 1024x1024 | Desvio de olhar: $-3.8^\circ$, queixo: $-3.2^\circ$ |
-| **07** | Motion Diffusion MDM | 12.48s | 312 | 1024x1024 | Diversidade: $3.720^\circ$, fidelidade labial: $0.0045$ |
-| **08** | **Comparativo Geral SOTA** | **9.69s** | **242** | **1920x1370** | **Grade 2x3 simultanea de todos os 6 modelos SOTA** |
-
----
-
 ## Modulo 08: Comparativo Geral SOTA — A Prova de Fogo de Todos os Modelos
 
-Para comparar diretamente as arquiteturas, os 6 modelos generativos foram submetidos a **exata mesma entrada ("Prova de Fogo")** e renderizados lado a lado em uma grade 2x3 de alta resolucao (1920x1370 @ 25 FPS):
+Para comparar diretamente as arquiteturas, os 6 modelos generativos foram submetidos a exata mesma entrada ("Prova de Fogo") e renderizados lado a lado em uma grade 2x3 de alta resolucao (1920x1370 @ 25 FPS):
 - **Audio Unificado:** `data/prova_de_fogo.wav` (9.69s | 242 frames);
 - **Fase 1 (0.0s a 2.4s):** Analise e Foco (*"Analise esta hipotese com atencao."*);
 - **Fase 2 (2.4s a 4.6s):** Pausa Reflexiva de 2.2s em Silencio Absoluto (Teste critico de boca e olhar);
@@ -142,12 +126,28 @@ Para comparar diretamente as arquiteturas, os 6 modelos generativos foram submet
 
 | Modelo SOTA | Fase 1: Foco Analitico | Fase 2: Silencio (Prova da Boca e Olhar) | Fase 3: Conviccao e Climax | O Que Este Modelo Aprimora |
 | :--- | :--- | :--- | :--- | :--- |
-| **VASA-1** | Articulacao fonetica basal neutra. | **Passivo:** Boca semi-aberta com exposicao dentaria residual (sem VAD). | Articulacao comum sem intencao emocional. | **Baseline holistico:** Referencia de partida sem intervencao comportamental externa. |
-| **AUHead** | Ativacao muscular do corrugador (AU04 = 0.85): cenho franzido evidente. | Relaxamento gradual das Action Units faciais. | Sorriso Duchenne radiante com zigomatico (AU12 = 0.85) e orbicular (AU06 = 0.65). | **Controle anatomico:** Expressividade muscular cirurgica e sorriso aberto genuino via FACS. |
-| **InstructAvatar** | Postura altiva de orador com queixo elevado ($\text{Pitch} = -4.5^\circ$). | **Labios selados:** `vad_alpha = 0.0` com boca 100% ocluida e fechada. | Presenca cenica imponente ($\text{Pitch} = -5.5^\circ$) e articulacao clara. | **Direcao cenica:** Postura de palco teatral e prevencao de boca entreaberta via NLP. |
-| **Audio2Photoreal** | Fala ativa em turno conversacional. | **Escuta Ativa:** Dispara 2 acenos nitidos (*nodding* $\Delta \text{Pitch} = +5.5^\circ$) com boca 100% selada. | Retomada fluida de turno de fala sem descontinuidade. | **Comportamento social:** Balanca a cabeca em concordancia diadica durante o silencio. |
-| **OmniHuman-1.5** | Arco 1: Foco introspectivo compenetrado ($\text{Pitch} = +2.5^\circ$). | **Gaze Aversion Notavel:** Vira cabeca e olhar para esquerda/cima ($\text{Yaw} = -9.0^\circ$, $\text{Pitch} = -3.5^\circ$). | Arco 3: Elevacao assertiva de queixo ($\text{Pitch} = -4.5^\circ$) e olhar direto. | **Cognicao deliberativa:** Simula pensamento e desvio de olhar reflexivo antes da resposta. |
-| **MDM (Diffusion)** | Amostragem estocastica com cinematica viva. | Dinamica postural organica continua livre de rigidez. | Ampla dispersao angular tridimensional livre do colapso estatistico a media. | **Anti-colapso a media:** Movimentacao angular continua, rica e natural. |
+| **VASA-1** | Articulacao fonetica basal neutra. | Boca semi-aberta com exposicao dentaria residual (sem VAD). | Articulacao comum sem intencao emocional. | Baseline holistico puro sem intervencao comportamental. |
+| **AUHead** | Ativacao do corrugador (AU04 = 0.85): cenho franzido evidente. | Relaxamento gradual das Action Units faciais. | Sorriso Duchenne radiante com zigomatico (AU12 = 0.85) e orbicular (AU06 = 0.65). | Expressividade muscular cirurgica e sorriso aberto genuino via FACS. |
+| **InstructAvatar** | Postura altiva de orador com queixo elevado ($\text{Pitch} = -4.5^\circ$). | Labios selados (`vad_alpha = 0.0`) com boca 100% ocluida e fechada. | Presenca cenica imponente ($\text{Pitch} = -5.5^\circ$) e articulacao clara. | Postura de palco teatral e prevencao de boca entreaberta via NLP. |
+| **Audio2Photoreal** | Fala ativa em turno conversacional. | Escuta Ativa: dispara 2 acenos nitidos (*nodding* $\Delta \text{Pitch} = +5.5^\circ$) com boca 100% selada. | Retomada fluida de turno de fala sem descontinuidade. | Balanca a cabeca em concordancia diadica durante o silencio. |
+| **OmniHuman-1.5** | Foco introspectivo compenetrado ($\text{Pitch} = +2.5^\circ$). | Gaze Aversion: vira cabeca e olhar para esquerda/cima ($\text{Yaw} = -9.0^\circ$, $\text{Pitch} = -3.5^\circ$). | Elevacao assertiva de queixo ($\text{Pitch} = -4.5^\circ$) e olhar direto. | Simula pensamento e desvio de olhar reflexivo antes da resposta. |
+| **MDM (Diffusion)** | Amostragem estocastica com cinematica viva. | Dinamica postural organica continua livre de rigidez. | Ampla dispersao angular tridimensional livre do colapso estatistico a media. | Movimentacao angular continua, rica e natural (anti-colapso). |
+
+---
+
+## Tabela Sintetica de Resultados
+
+| Modulo | Modelo | Duracao | Frames | Resolucao | Metrica Chave |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **01** | LivePortrait Core | — | — | — | $\mathbf{R}^T\mathbf{R} = \mathbf{I}$, $\det(\mathbf{R}) = 1.000$ |
+| **02** | VASA-1 (Microsoft) | 9.84s | 246 | 1024x1024 | Pitch $[-2.1^\circ, +3.4^\circ]$, Yaw $[-4.2^\circ, +3.8^\circ]$ |
+| **03** | AUHead FACS Solo | 14.60s | 365 | 1024x1024 | AU04: $-0.008$, AU12: $+0.035$ |
+| **03** | Comparativo Split-Screen | 7.64s | 191 | 2048x1024 | Comparativo lado a lado VASA-1 vs AUHead |
+| **04** | InstructAvatar NLP | 10.80s | 270 | 1024x1024 | Pitch: $-2.5^\circ$, contato labial preservado |
+| **05** | Audio2Photoreal Diadico | 14.68s | 367 | 1024x1024 | 2 acenos ($2.2\text{ Hz}$), boca selada em repouso |
+| **06** | OmniHuman-1.5 Dual | 10.76s | 269 | 1024x1024 | Desvio de olhar: $-3.8^\circ$, queixo: $-3.2^\circ$ |
+| **07** | Motion Diffusion MDM | 12.48s | 312 | 1024x1024 | Diversidade: $3.720^\circ$, fidelidade labial: $0.0045$ |
+| **08** | **Comparativo Geral SOTA** | **9.69s** | **242** | **1920x1370** | **Grade 2x3 simultanea de todos os 6 modelos SOTA** |
 
 ---
 
