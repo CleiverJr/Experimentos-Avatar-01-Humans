@@ -27,18 +27,18 @@ Este modulo implementa o controle anatomico e biomecanico baseado no Facial Acti
 
 ## 2. Fundamentacao Anatomica e Mapeamento Biomecanico
 
-O sistema FACS decompõe os movimentos faciais em Action Units (AUs) associadas a grupos musculares especificos. No AUHead, essas acoes musculares sao mapeadas em perturbacoes diferenciais $\boldsymbol{\delta}_{exp} \in \mathbb{R}^{21 \times 3}$ nos keypoints canonicos:
+O sistema FACS decompõe os movimentos faciais em Action Units (AUs) associadas a grupos musculares especificos. No AUHead, essas acoes musculares sao mapeadas em perturbacoes diferenciais delta_exp em R^(21x3) nos keypoints canonicos:
 
 | Action Unit | Nome Anatomico / Musculo | Modulacao nos Keypoints 3D | Efeito Visual |
 | :--- | :--- | :--- | :--- |
-| **AU01** | *Inner Brow Raiser* (Frontal medial) | $\Delta y_{1} = +0.012$, $\Delta y_{2} = -0.012$ | Cantos internos das sobrancelhas sobem (tristeza / surpresa) |
-| **AU02** | *Outer Brow Raiser* (Frontal lateral) | $\Delta y_{1} = +0.020$, $\Delta y_{2} = -0.020$ | Sobrancelhas inteiras sao elevadas (atencao / espanto) |
-| **AU04** | *Brow Lowerer* (Corrugador do supercilio) | $\Delta y_{1} = -0.008$, $\Delta y_{2} = +0.008$ | Glabela franzida e sobrancelhas aproximadas (raiva / foco) |
-| **AU06** | *Cheek Raiser* (Orbicular do olho) | $\Delta y_{11, 15} = +0.018$, $\Delta y_{13, 16} = -0.005$ | Elevacao das macas do rosto e compressao palpebral |
-| **AU12** | *Lip Corner Puller* (Zigomatico maior) | $\Delta x_{3, 7} = \pm 0.035$, $\Delta y_{13, 16} = -0.0028$ | Tracionamento dos cantos bucais para as orelhas (sorriso) |
-| **AU15** | *Lip Corner Depressor* (Depressor labial) | $\Delta y_{20} = +0.010$, $\Delta y_{14} = +0.020$ | Cantos dos labios caem (tristeza / desapontamento) |
-| **AU26** | *Jaw Drop* (Masseter / Pterigoideo) | $\Delta y_{19} = +0.001 \times 40$ | Abertura mandibular coordenada com o audio |
-| **AU43** | *Eyes Closed* (Orbicular ocular palpebral) | $\Delta y_{11, 15} = +0.018$ | Oclusao palpebral estrita sem deformar o globo ocular |
+| **AU01** | *Inner Brow Raiser* (Frontal medial) | Delta y1 = +0.012, Delta y2 = -0.012 | Cantos internos das sobrancelhas sobem (tristeza / surpresa) |
+| **AU02** | *Outer Brow Raiser* (Frontal lateral) | Delta y1 = +0.020, Delta y2 = -0.020 | Sobrancelhas inteiras sao elevadas (atencao / espanto) |
+| **AU04** | *Brow Lowerer* (Corrugador do supercilio) | Delta y1 = -0.008, Delta y2 = +0.008 | Glabela franzida e sobrancelhas aproximadas (raiva / foco) |
+| **AU06** | *Cheek Raiser* (Orbicular do olho) | Delta y(11,15) = +0.018, Delta y(13,16) = -0.005 | Elevacao das macas do rosto e compressao palpebral |
+| **AU12** | *Lip Corner Puller* (Zigomatico maior) | Delta x(3,7) = +/- 0.035, Delta y(13,16) = -0.0028 | Tracionamento dos cantos bucais para as orelhas (sorriso) |
+| **AU15** | *Lip Corner Depressor* (Depressor labial) | Delta y20 = +0.010, Delta y14 = +0.020 | Cantos dos labios caem (tristeza / desapontamento) |
+| **AU26** | *Jaw Drop* (Masseter / Pterigoideo) | Delta y19 = +0.001 * 40 | Abertura mandibular coordenada com o audio |
+| **AU43** | *Eyes Closed* (Orbicular ocular palpebral) | Delta y(11,15) = +0.018 | Oclusao palpebral estrita sem deformar o globo ocular |
 
 ---
 

@@ -34,10 +34,10 @@ O VASA-1 formula a sintese como a predicao conjunta e holistica de toda a dinami
 
 ## 3. Dinamica de Pose Rigida da Cabeca
 
-A pose da cabeca e expressa no espaco $\mathrm{SO}(3)$ por meio dos angulos de Euler:
-- **Pitch ($\theta_x$):** Movimento vertical de elevacao e abaixamento do queixo;
-- **Yaw ($\theta_y$):** Rotacao horizontal lateral (olhar para a esquerda ou direita);
-- **Roll ($\theta_z$):** Inclinacao lateral da cabeca sobre os ombros.
+A pose da cabeca e expressa no espaco SO(3) por meio dos angulos de Euler:
+- **Pitch (theta_x):** Movimento vertical de elevacao e abaixamento do queixo;
+- **Yaw (theta_y):** Rotacao horizontal lateral (olhar para a esquerda ou direita);
+- **Roll (theta_z):** Inclinacao lateral da cabeca sobre os ombros.
 
 No VASA-1, essas trajetorias emergem da distribuicao aprendida de sincronizacao de discurso humano, apresentando acenos e inclinacoes sincronizados com as pausas e enfases vocais.
 
@@ -49,10 +49,10 @@ Durante o processamento do audio `vasa_speech.wav` (9.84s), a trajetoria gerada 
 
 | Parametro de Movimento | Faixa Observada | Media Temporal | Desvio Padrao |
 | :--- | :--- | :--- | :--- |
-| **Pitch (Inclinacao Vertical)** | $[-2.10^\circ, +3.40^\circ]$ | $+0.65^\circ$ | $1.15^\circ$ |
-| **Yaw (Rotacao Lateral)** | $[-4.20^\circ, +3.80^\circ]$ | $-0.32^\circ$ | $1.82^\circ$ |
-| **Roll (Inclinacao de Ombro)** | $[-1.80^\circ, +1.50^\circ]$ | $-0.10^\circ$ | $0.74^\circ$ |
-| **Abertura Labial (AU26 / Exp)** | $[0.00, 0.42]$ | $0.18$ | $0.11$ |
+| **Pitch (Inclinacao Vertical)** | [-2.10°, +3.40°] | +0.65° | 1.15° |
+| **Yaw (Rotacao Lateral)** | [-4.20°, +3.80°] | -0.32° | 1.82° |
+| **Roll (Inclinacao de Ombro)** | [-1.80°, +1.50°] | -0.10° | 0.74° |
+| **Abertura Labial (AU26 / Exp)** | [0.00, 0.42] | 0.18 | 0.11 |
 
 ### Observacoes:
 - A articulacao labial preserva sincronia fonetica estrita com o audio de entrada;

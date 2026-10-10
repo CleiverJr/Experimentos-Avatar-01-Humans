@@ -48,15 +48,15 @@ O aceno afirmativo e sintetizado por uma funcao senoidal amortecida com envelope
 $$\Delta \theta_{pitch}(t) = A \cdot \exp\left(-\frac{(t - t_{pico})^2}{2\sigma^2}\right) \cdot \sin(2\pi f (t - t_{inicio}))$$
 
 onde:
-- Frequencia fundamental de aceno: $f = 2.2\text{ Hz}$;
-- Amplitude angular: $A \in [1.8^\circ, 2.5^\circ]$;
-- Desvio padrao do envelope: $\sigma = 0.35\text{ s}$.
+- Frequencia fundamental de aceno: f = 2.2 Hz;
+- Amplitude angular: A em [1.8°, 2.5°];
+- Desvio padrao do envelope: sigma = 0.35 s.
 
 ---
 
 ## 4. Resultados e Telemetria
 
-- **Repouso Bucal na Escuta:** Deslocamento labial vertical nulo ($\Delta y_{exp} = 0.000$) durante a fala do interlocutor;
+- **Repouso Bucal na Escuta:** Deslocamento labial vertical nulo (Delta y_exp = 0.000) durante a fala do interlocutor;
 - **Cinematica de Cabeca:** 2 ciclos de aceno perfeitamente sincronizados com os picos de entonacao do interlocutor;
 - **Zero Jitter:** Transicao suave de retorno a fala atraves de interpolacao Hermite (smoothstep).
 
